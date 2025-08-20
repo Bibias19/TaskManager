@@ -31,10 +31,10 @@
                                     placeholder="Task Title" autofocus>
                             </div>
                             <div class="form-group">
-                                <textarea name="descripcion" rows="2" class="form-control"
+                                <textarea name="description" rows="2" class="form-control"
                                     placeholder="Task Description"></textarea>
                             </div>
-                            <input type="submit" class="btn btn-success btn-block"
+                            <input type="submit" name="salvar" class="btn btn-success btn-block"
                                 value="Save Task">
                         </form>
                     </div>
@@ -53,21 +53,35 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- Aqui vão as tarefas -->
-                            <tr>
-                                <td>1</td>
-                                <td>Atividade</td>
-                                <td>Descrição da atividade</td>
-                                <td>15-08-2025</td>
-                                <td>
-                                    <a href="#" class="btn btn-secondary">
-                                        <i class="fas fa-marker"></i>
-                                    </a>
-                                    <a href="#" class="btn btn-danger">
-                                        <i class="far fa-trash-alt"></i>
-                                    </a>
-                                </td>
-                            </tr>
+                            <?php
+                            require_once 'conn.php';
+                            $query = "SELECT id, title, description, create_at FROM crud_php";
+                            $result = $conn->query($query);
+
+                            if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) {
+                            ?>
+                                    <tr>
+                                        <td><?php echo $row['id']; ?></td>
+                                        <td><?php echo $row['title']; ?></td>
+                                        <td><?php echo $row['description']; ?></td>
+                                        <td><?php echo $row['created_at']; ?></td>
+                                        <td>
+                                            <a href="#" class="btn btn-secondary">
+                                                <i class="fas fa-marker"></i>
+                                            </a>
+                                            <a href="#" class="btn btn-danger">
+                                                <i class="far fa-trash-alt"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                            <?php
+                                }
+                            } else {
+                                echo "<tr><td colspan='5'>No tasks found</td></tr>";
+                            }
+                            $conn->close();
+                            ?>
                         </tbody>
                     </table>
                 </div>
