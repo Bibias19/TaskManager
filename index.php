@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
@@ -25,9 +25,9 @@
                 <div class="col-md-4">
                     <!--formulario-->
                     <div class="card card-body">
-                        <form action="#" method="POST">
+                        <form action="save.php" method="POST">
                             <div class="form-group">
-                                <input type="text" name="titulo" class="form-control"
+                                <input type="text" name="title" class="form-control"
                                     placeholder="Task Title" autofocus>
                             </div>
                             <div class="form-group">
