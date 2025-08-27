@@ -65,9 +65,9 @@
                                         <td><?php echo $row['id']; ?></td>
                                         <td><?php echo $row['title']; ?></td>
                                         <td><?php echo $row['description']; ?></td>
-                                        <td><?php echo $row['created_at']; ?></td>
+                                        <td><?php echo $row['create_at']; ?></td>
                                         <td>
-                                            <a href="#" class="btn btn-secondary">
+                                            <a href="edit.php?id=<?=$row['id']; ?>"class="btn btn-secondary">
                                                 <i class="fas fa-marker"></i>
                                             </a>
                                             <a href="delete.php?id=<?=$row['id'];?>" class="btn btn-danger">
