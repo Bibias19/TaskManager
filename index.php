@@ -18,7 +18,13 @@
         <nav class="navbar navbar-light bg-light">
             <div class="container">
                 <a class="navbar-brand" href="index.php">CRUD PHP</a>
+                <form action="login.php" method="GET" class="d-inline">
+                    <button type="submit" class="btn btn-secondary">
+                        <i class="fas fa-sign-out-alt"></i>Logout
+                    </button>
+                </form>
             </div>
+
         </nav>
         <main class="container p-4">
             <div class="row">
@@ -28,7 +34,7 @@
                         <form action="save.php" method="POST">
                             <div class="form-group">
                                 <input type="text" name="title" class="form-control"
-                                    placeholder="Task Title" autofocus>
+                                    placeholder="Task Title" autofocus required>
                             </div>
                             <div class="form-group">
                                 <textarea name="description" rows="2" class="form-control"
@@ -64,13 +70,13 @@
                                     <tr>
                                         <td><?php echo $row['id']; ?></td>
                                         <td><?php echo $row['title']; ?></td>
-                                        <td><?php echo $row['description']; ?></td>
-                              <td><?=date("d/m/Y H:i:s", strtotime($row ['create_at'])); ?></td>
+                                        <td><?= substr($row['description'], 0, 20) . '...' ?></td>
+                                        <td><?= date("d/m/Y H:i:s", strtotime($row['create_at'])); ?></td>
                                         <td>
-                                            <a href="edit.php?id=<?=$row['id']; ?>"class="btn btn-secondary">
+                                            <a href="edit.php?id=<?= $row['id']; ?>" class="btn btn-secondary">
                                                 <i class="fas fa-marker"></i>
                                             </a>
-                                            <a href="delete.php?id=<?=$row['id'];?>" class="btn btn-danger">
+                                            <a href="delete.php?id=<?= $row['id']; ?>" class="btn btn-danger">
                                                 <i class="far fa-trash-alt"></i>
                                             </a>
                                         </td>
