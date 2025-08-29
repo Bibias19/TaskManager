@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Cadastro</title>
     <!-- BOOTSTRAP -->
     <link rel="stylesheet" href="https://bootswatch.com/4/yeti/bootstrap.min.css">
     <!-- FONT AWESOME -->
@@ -12,13 +12,16 @@
         integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
         crossorigin="anonymous">
 
+
+</head>
+
 <body>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-4">
                 <div class="card card-body mt-5">
-                    <h2 class="text-center">Login</h2>
-                    <form action="authenticate.php" method="POST">
+                    <h2 class="text-center">Cadastro</h2>
+                    <form action="register_logic.php" method="POST">
                         <div class="form-group">
                             <input name="email" type="name" id="email" class="form-control"
                                 placeholder="exemplo@email.com" required>
@@ -27,15 +30,18 @@
                             <input name="password" type="password" id="password" class="form-control"
                                 placeholder="Senha" required>
                         </div>
-                        <button type="submit" class="btn btn-success btn-block">Entrar</button>
+                                  <div class="form-group">
+                            <input name="confirm_password" type="password" id="confirm_password" class="form-control"
+                                placeholder="Confirmação de senha" required>
+                        </div>
+                        <button type="submit" class="btn btn-success btn-block">Cadastrar</button>
                     </form>
                     <div class="text-center mt-3">
-                        <a href="register.php">Cadastre-se</a>
+                        <a href="login.php">Já possui uma conta? Faça Login</a>
                     </div>
                 </div>
             </div>
         </div>
-
         <!-- BOOTSTRAP 4 script-->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
