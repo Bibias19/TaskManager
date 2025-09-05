@@ -18,9 +18,14 @@ try {
             if ($stmt) {
                 $stmt->bind_param("ssi", $title, $description, $id);
                 if ($stmt->execute()) {
+                    $_SESSION['message'] = 'Task Updated Successfully';
+                    $_SESSION['message_type'] = 'primary';
                     header("Location: index.php");
                     exit();
                 } else {
+                    session_start();
+                    $_SESSION['message'] = 'Error Updating Task';
+                    $_SESSION['message_type'] = 'danger';
                     throw new Exception("Error executing query: " . $stmt->error);
                 }
                 $stmt->close();
@@ -34,7 +39,10 @@ try {
         throw new Exception("Invalid request method.");
     }
 } catch (Exception $e) {
-    echo "Error: " . $e->getMessage();
+    $_SESSION['message'] = 'Error: ' . $e->getMessage();
+    $_SESSION['message_type'] = 'danger';
+    header('Location: index.php');
+    exit();
 } finally {
     $conn->close();
 }

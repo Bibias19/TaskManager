@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(!isset($_SESSION['user_id'])){
+if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
 }
@@ -9,6 +9,9 @@ require_once 'conn.php';
 $id = isset($_GET['id']) ? $_GET['id'] : null;
 if (!$id) {
     echo "ID da tarefa não fornecido.";
+    $_SESSION['message'] = 'ID da tarefa não fornecido.';
+    $_SESSION['message_type'] = 'danger';
+    header('Location: index.php');
     exit();
 }
 try {
@@ -26,7 +29,9 @@ try {
         }
         $stmt->close();
     } else {
-        throw new Exception("Erro ao preparar a consulta: " . $conn->error);
+        $_SESSION['message'] = 'Error preparing statement: ';
+        $_SESSION['message_type'] = 'danger';
+        header('Location: index.php');
         exit();
     }
 } catch (Exception $e) {
@@ -69,7 +74,7 @@ try {
                         <form action="update.php" method="POST">
                             <input type="hidden" name="id" value="<?php echo $task['id']; ?>">
                             <div class="form-group">
-                                <input type="text" name="title" class="form-control"value="<?php echo $task['title']; ?>" placeholder="Atualize o título" autofocus>
+                                <input type="text" name="title" class="form-control" value="<?php echo $task['title']; ?>" placeholder="Atualize o título" autofocus>
                             </div>
                             <div class="form-group">
                                 <textarea name="description" rows="2" class="form-control" placeholder="Atualize a descrição"><?php echo $task['description']; ?></textarea>

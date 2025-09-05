@@ -2,9 +2,9 @@
 require_once 'conn.php';
 try {
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
-        $email = isset($_POST['email']) ? $_POST['email'] : null;
-        $password = isset($_POST['password']) ? $_POST['password'] : null;
-        $confirm_password = isset($_POST['confirm_password']) ? $_POST['confirm_password'] : null;
+        $email = $_POST['email'] ?? null;
+        $password = $_POST['password'] ??null;
+        $confirm_password = $_POST['confirm_password'] ?? null;
         if ($email && $password) {
             if ($password !== $confirm_password) {
                 throw new Exception("As senhas não coincidem.");
@@ -18,7 +18,9 @@ try {
             if($stmt){
                 $stmt->bind_param("ss", $email, $hashed_password);
                 if ($stmt->execute()) {
-                        // Registration successful, redirect to login page
+                    session_start();
+                    $_SESSION['message'] = 'Cadastro realizado com sucesso. Por favor, faça login.';
+                    $_SESSION['message_type'] = 'primary';
                     header("Location: login.php");
                     exit();
                 } else {

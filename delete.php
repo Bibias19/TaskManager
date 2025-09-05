@@ -1,4 +1,9 @@
 <?php
+session_start();
+if(!isset($_SESSION['user_id'])){
+    header("Location: login.php");
+    exit();
+}
 require_once 'conn.php';
 try {
     if (isset($_GET['id'])) {
@@ -8,9 +13,16 @@ try {
         if ($stmt) {
             $stmt->bind_param("i", $id);
             if ($stmt->execute()) {
+                session_start();
+                $_SESSION['message'] = 'Task Deleted Successfully';
+                $_SESSION['message_type'] = 'success';
+
                 header("Location: index.php");
                 exit();
             } else {
+                session_start();
+                $_SESSION['message'] = 'Error Deleting Task';
+                $_SESSION['message_type'] = 'danger';
                 throw new Exception("Error executing query: " . $stmt->error);
             }
             $stmt->close();

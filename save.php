@@ -1,4 +1,9 @@
 <?php
+session_start();
+if(!isset($_SESSION['user_id'])){
+    header("Location: login.php");
+    exit();
+}
 require_once 'conn.php';
 try {
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
@@ -11,9 +16,14 @@ try {
             if ($stmt) {
                 $stmt->bind_param("ss", $title, $description);
                 if ($stmt->execute()) {
+                    $_SESSION['message'] = 'Task Saved Successfully';
+                    $_SESSION['message_type'] = 'success';
                     header("Location: index.php");
                     exit();
                 } else {
+                    session_start();
+                    $_SESSION['message'] = 'Error Saving Task';
+                    $_SESSION['message_type'] = 'danger';
                     throw new Exception("Error executing query: " . $stmt->error);
                 }
                 $stmt->close();
